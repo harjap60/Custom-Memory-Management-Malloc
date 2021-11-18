@@ -8,18 +8,32 @@ int main(void)
     clock_gettime(CLOCK_MONOTONIC,&start);
 
     //Test for built in malloc and free
-    int **a = malloc(10000*sizeof(*a));
-    for(int i = 0; i < 10000;i++){
+    int **a = malloc(20000*sizeof(*a));
+    for(int i = 0; i < 20000;i++){
         a[i] = malloc(20000*sizeof(a));
         for(int j = 0;j<20000;j++){
             a[i][j] = j;
         }
     }
 
-    for(int i = 0;i<10000;i++){
+    for(int i = 0;i<20000;i++){
         free(a[i]);
     }
     free(a);
+
+ //Test for running the same program but no memory accesses
+// int a= 2;
+//     for(int i = 0; i < 20000;i++){
+//         a = 3;
+//         for(int j = 0;j<20000;j++){
+//             a = 4;
+//         }
+//     }
+
+//     for(int i = 0;i<20000;i++){
+//         a = 6;
+//     }
+//     a= 7;
 
 
     clock_gettime(CLOCK_MONOTONIC, &end);
